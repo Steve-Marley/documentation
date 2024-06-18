@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation ChatAssist</title>
+    <link href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Changez cette couleur pour modifier le fond d'écran */
+        }
+        .welcome {
+            font-size: 3em;
+            font-weight: bold;
+            color: #000000;
+            margin: 40px 0;
+            text-align: center;
+        }
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 10px;
+        }
+        .footer {
+            background-color: #212529; /* Couleur sombre pour le footer */
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        .footer .social-icons {
+            margin-top: 10px;
+        }
+        .footer .social-icons a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.2em;
+        }
+        .footer .quote {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #adb5bd;
+        }
+        .subscription-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .creator {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+        .rating-banner {
+            background-color: #ffcc00;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .rating-banner h2 {
+            margin-bottom: 10px;
+        }
+        .star-rating {
+            font-size: 2em;
+            color: #ffd700;
+        }
+        .star-rating input {
+            display: none;
+        }
+        .star-rating label {
+            cursor: pointer;
+        }
+        .star-rating input:checked ~ label {
+            color: #ffd700;
+        }
+        .star-rating input:not(:checked) ~ label:hover,
+        .star-rating input:not(:checked) ~ label:hover ~ label {
+            color: #ffd700;
+        }
+    </style>
+</head>
+<body>
+    <nav class="container-fluid">
+        <ul>
+            <li><strong>ChatAssist</strong></li>
+        </ul>
+        <ul>
+            <li><a href="#home">Accueil</a></li>
+            <li><a href="#features">Fonctionnalités</a></li>
+            <li><a href="#documentation">Documentation</a></li>
+            <li><a href="#subscription">Abonnement</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#admin">Administration</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <div class="welcome">Bienvenue dans la documentation de ChatAssist</div>
+        <div class="text-center">
+            <h3>Réalisé par:</h3>
+            <div class="creator">
+                <img src="Steve.jpg" alt="Steve-Marley" class="profile-pic">
+                <p>SOMO TOCHE Steve-Marley</p>
+            </div>
+            <div class="creator">
+                <img src="Stephane.jpg" alt="Stephane" class="profile-pic">
+                <p>KEGNE TUENO Stephane</p>
+            </div>
+        </div>
+
+        <div class="rating-banner">
+            <h2>Donnez votre appréciation</h2>
+            <div class="star-rating">
+                <input type="radio" id="star5" name="rating" value="5" />
+                <label for="star5" title="5 étoiles">&#9733;</label>
+                <input type="radio" id="star4" name="rating" value="4" />
+                <label for="star4" title="4 étoiles">&#9733;</label>
+                <input type="radio" id="star3" name="rating" value="3" />
+                <label for="star3" title="3 étoiles">&#9733;</label>
+                <input type="radio" id="star2" name="rating" value="2" />
+                <label for="star2" title="2 étoiles">&#9733;</label>
+                <input type="radio" id="star1" name="rating" value="1" />
+                <label for="star1" title="1 étoile">&#9733;</label>
+            </div>
+        </div>
+
+        <div class="grid">
+            <section id="features">
+                <hgroup>
+                    <h2>Fonctionnalités</h2>
+                </hgroup>
+                <p>Ce chatbot a de nombreuses fonctionnalités intégrées pour offrir une interaction riche avec les utilisateurs. Voici un aperçu détaillé des fonctionnalités disponibles :</p>
+                <h3>Système de Connexion et d'Inscription</h3>
+                <p>Les utilisateurs peuvent se connecter ou s'inscrire via l'interface de connexion. Le système vérifie les informations de l'utilisateur dans la base de données SQLite. Une interface utilisateur permet l'inscription de nouveaux utilisateurs avec des champs pour le prénom, le nom, l'email et le mot de passe.</p>
+                <h3>Fenêtre Principale</h3>
+                <p>Après la connexion, les utilisateurs accèdent à une fenêtre principale où ils peuvent choisir différentes options :</p>
+                <ul>
+                    <li><strong>Chat</strong> : Permet aux utilisateurs d'entrer dans une fenêtre de chat pour discuter avec le chatbot.</li>
+                    <li><strong>Assistant Personnel</strong> : Fournit une interface pour des interactions vocales avec le chatbot.</li>
+                    <li><strong>À propos</strong> : Affiche des informations sur l'application.</li>
+                    <li><strong>Réglages</strong> : Permet de modifier les paramètres de l'application.</li>
+                    <li><strong>Historique</strong> : Affiche l'historique des conversations des utilisateurs.</li>
+                </ul>
+                <h3>Chat</h3>
+                <p>Interface de chat textuelle où les utilisateurs peuvent envoyer des messages au chatbot. Le chatbot répond aux messages des utilisateurs en utilisant des paires de réponses prédéfinies et peut aussi effectuer des recherches sur Google pour des réponses supplémentaires. Les conversations sont stockées dans une base de données SQLite avec des horodatages.</p>
+                <h3>Assistant Personnel</h3>
+                <p>Interface pour des interactions vocales avec le chatbot. Utilise <code>speech_recognition</code> pour la reconnaissance vocale et <code>pyttsx3</code> pour la synthèse vocale. Le chatbot peut répondre aux commandes vocales pour :</p>
+                <ul>
+                    <li>Dire bonjour.</li>
+                    <li>Répondre à des questions sur l'heure.</li>
+                    <li>Jouer des chansons sur YouTube via <code>pywhatkit</code>.</li>
+                    <li>Répondre à des questions basiques sur son nom.</li>
+                </ul>
+                <h3>Réglages</h3>
+                <p>Interface pour modifier divers paramètres de l'application :</p>
+                <ul>
+                    <li>Changer la voix de l'assistant (français, anglais, espagnol).</li>
+                    <li>Régler le volume.</li>
+                    <li>Changer la police d'affichage.</li>
+                    <li>Changer la langue de l'interface.</li>
+                    <li>Changer le fond d'écran.</li>
+                </ul>
+                <h3>Historique</h3>
+                <p>Interface pour afficher l'historique des conversations de l'utilisateur. Les conversations sont récupérées à partir de la base de données SQLite et affichées avec les horodatages.</p>
+            </section>
+
+            <section id="documentation">
+                <hgroup>
+                    <h2>Documentation du Code Python</h2>
+                </hgroup>
+                <div>
+                    <h4>ChatbotThread (Classe)</h4>
+                    <p>Cette classe gère la création d'un thread pour le chatbot et l'exécute en répondant aux messages ou en effectuant une recherche Google si aucune réponse n'est trouvée dans les paires prédéfinies.</p>
+                    <ul>
+                        <li><b>response_ready</b>: Signal émis lorsqu'une réponse est prête.</li>
+                        <li><b>run()</b>: Méthode principale du thread, utilise le module nltk pour répondre aux messages ou recherche sur Google.</li>
+                        <li><b>google_search(query)</b>: Effectue une recherche Google en utilisant BeautifulSoup et retourne la réponse trouvée.</li>
+                    </ul>
+                    <h4>DatabaseManager (Classe)</h4>
+                    <p>Cette classe gère la connexion à la base de données SQLite (clients.db) et fournit des méthodes pour insérer des clients et récupérer leur historique.</p>
+                    <ul>
+                        <li><b>__init__()</b>: Initialise la connexion à la base de données et crée les tables si elles n'existent pas.</li>
+                        <li><b>create_tables()</b>: Crée les tables clients et history si elles n'existent pas.</li>
+                        <li><b>insert_client(firstname, lastname, email, password)</b>: Insère un nouveau client dans la table clients.</li>
+                        <li><b>get_client(username)</b>: Récupère le prénom et le mot de passe d'un client à partir de la table clients.</li>
+                        <li><b>insert_history(user_name, timestamp, conversation)</b>: Insère une entrée d'historique dans la table history.</li>
+                        <li><b>get_history(user_name)</b>: Récupère tout l'historique des conversations pour un utilisateur donné.</li>
+                    </ul>
+                    <h4>WindowManager (Classe)</h4>
+                    <p>Cette classe gère les fenêtres de l'application PyQt5 et coordonne le passage entre la fenêtre d'inscription et la fenêtre principale du chatbot.</p>
+                    <ul>
+                        <li><b>__init__()</b>: Initialise l'application PyQt5, crée une instance de DatabaseManager et affiche la fenêtre d'inscription.</li>
+                        <li><b>show_registration_window()</b>: Affiche la fenêtre d'inscription.</li>
+                        <li><b>show_chatbot_window(user_name)</b>: Affiche la fenêtre principale du chatbot après la connexion.</li>
+                        <li><b>run()</b>: Exécute l'application PyQt5.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section aria-label="Subscribe example" id="subscription">
+                <div class="container">
+                    <article>
+                        <hgroup>
+                            <h2>Abonnement</h2>
+                            <h3>Inscrivez-vous à notre service</h3>
+                        </hgroup>
+                        <form class="subscription-form" onsubmit="handleSubscription(event)">
+                            <input type="text" id="subscriptionName" name="firstname" placeholder="Entrez votre nom" aria-label="Nom" required />
+                            <input type="password" id="subscriptionPassword" name="password" placeholder="Entrez votre mot de passe" aria-label="Mot de passe" required />
+                            <button type="submit">Souscrire</button>
+                        </form>
+                    </article>
+                </div>
+            </section>
+
+            <section id="admin" class="hidden">
+                <div class="container">
+                    <article>
+                        <hgroup>
+                            <h2>Administration</h2>
+                        </hgroup>
+                        <form onsubmit="handleAdminAccess(event)">
+                            <input type="password" id="adminCode" name="adminCode" placeholder="Entrez le code administrateur" aria-label="Code administrateur" required />
+                            <button type="submit">Accéder</button>
+                        </form>
+                        <div id="adminContent" class="hidden">
+                            <h3>Statistiques de Visite</h3>
+                            <ul id="visitStats"></ul>
+                            <h3>Informations sur les Abonnés</h3>
+                            <ul id="subscriberStats"></ul>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>Contactez-nous :</p>
+            <p><a href="tel:+237691605820"><img src="https://img.icons8.com/material-outlined/24/ffffff/phone.png"/> +237 691605820</a></p>
+            <p><a href="https://wa.me/237691605820" target="_blank"><img src="https://img.icons8.com/material-outlined/24/ffffff/whatsapp.png"/> +237 69160582</a></p>
+            <p><a href="https://www.facebook.com/SteveMarleyToche" target="_blank"><img src="https://img.icons8.com/material-outlined/24/ffffff/facebook-new.png"/> Steve Marley Toche</a></p>
+            <p><a href="https://t.me/SteveMarley" target="_blank"><img src="https://img.icons8.com/material-outlined/24/ffffff/telegram-app.png"/> Steve Marley (+237 691605820)</a></p>
+            <p><a href="https://www.instagram.com/Stevemarleytoche" target="_blank"><img src="https://img.icons8.com/material-outlined/24/ffffff/instagram-new.png"/> Stevemarleytoche</a></p>
+            <div class="quote">
+                "Le développement d’une IA complète pourrait signifier la fin de la race humaine… Elle s’améliorera de manière autonome à un rythme croissant. Les humains, limités par l’évolution biologique lente, ne pourraient pas concurrencer et seraient dépassés." - Ray Kurzweil, inventeur et futurologue.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simulation de la base de données d'abonnés
+        const subscribers = [
+            {name: 'User1', password: 'password1'},
+            {name: 'User2', password: 'password2'},
+            // Ajoutez ici les autres abonnés
+        ];
+
+        // Fonction pour gérer la soumission du formulaire d'abonnement
+        function handleSubscription(event) {
+            event.preventDefault();
+            // Ajout de l'abonné à la base de données simulée
+            const name = document.getElementById('subscriptionName').value;
+            const password = document.getElementById('subscriptionPassword').value;
+            subscribers.push({name, password});
+            alert('Vous êtes maintenant abonné!');
+            // Redirection vers la page PayPal
+            window.location.href = "https://www.paypal.com/signin";
+        }
+
+        // Fonction pour gérer l'accès à l'administration
+        function handleAdminAccess(event) {
+            event.preventDefault();
+            const adminCode = document.getElementById('adminCode').value;
+            if (adminCode === 'Stefudesi') {
+                document.getElementById('adminContent').classList.remove('hidden');
+                displayVisitStats();
+                displaySubscriberStats();
+            } else {
+                alert('Code administrateur incorrect');
+            }
+        }
+
+        // Fonction pour afficher les statistiques de visite
+        function displayVisitStats() {
+            const visitStats = document.getElementById('visitStats');
+            const visits = [
+                {name: 'User1', password: 'password1'},
+                {name: 'User2', password: 'password2'},
+                // Ajoutez ici les autres statistiques de visite
+            ];
+            visits.forEach(visit => {
+                const li = document.createElement('li');
+                li.textContent = `Nom: ${visit.name}, Mot de passe: ${visit.password}`;
+                visitStats.appendChild(li);
+            });
+        }
+
+        // Fonction pour afficher les informations sur les abonnés
+        function displaySubscriberStats() {
+            const subscriberStats = document.getElementById('subscriberStats');
+            subscriberStats.innerHTML = ''; // Réinitialiser le contenu
+            subscribers.forEach(subscriber => {
+                const li = document.createElement('li');
+                li.textContent = `Nom: ${subscriber.name}, Mot de passe: ${subscriber.password}`;
+                subscriberStats.appendChild(li);
+            });
+            const totalSubscribers = document.createElement('li');
+            totalSubscribers.textContent = `Nombre total d'abonnés: ${subscribers.length}`;
+            subscriberStats.appendChild(totalSubscribers);
+        }
+    </script>
+</body>
+</html>
